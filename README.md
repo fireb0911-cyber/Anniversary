@@ -10,7 +10,7 @@ A romantic interactive anniversary slideshow website.
 
 ## 🔒 Password Protected
 
-Password: `love`
+
 
 ## ✨ Features
 
