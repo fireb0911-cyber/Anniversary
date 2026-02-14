@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 5th Anniversary</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #ff4d6d, #ffc2d1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.card {
+    background: #fff0f5;
+    width: 90%;
+    max-width: 380px;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+h1 { 
+    color: #d6336c;
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+h2 { 
+    color: #b5179e;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 16px;
+    color: #444;
+    margin: 8px 0;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 50px;
+}
+
+button {
+    width: 120px;
+    padding: 10px 0;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+}
+
+#yesBtn:hover {
+    background-color: #e63950;
+}
+
+#noBtn {
+    background-color: #adb5bd;
+    color: white;
+    position: fixed;
+    right: 0;
+    transition: all 0.1s ease;
+}
+
+.heart {
+    position: fixed;
+    font-size: 20px;
+    animation: fall 4s linear infinite;
+    z-index: 1;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(110vh); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 20px; }
+    h2 { font-size: 18px; }
+    p { font-size: 14px; }
+    button {
+        width: 100px;
+        font-size: 14px;
+        padding: 8px 0;
+    }
+    .card {
+        padding: 15px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="card" id="passwordCard">
+    <h1>🔒 Enter Password</h1>
+    <input type="password" id="passwordInput" placeholder="Enter password" style="width: 80%; padding: 12px; margin: 20px 0; border: 2px solid #ff4d6d; border-radius: 10px; font-size: 16px; text-align: center;">
+    <button onclick="checkPassword()" style="width: 150px; padding: 12px; background: #ff4d6d; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 16px;">Unlock 💖</button>
+    <p id="errorMsg" style="color: red; margin-top: 10px; display: none;">Wrong password! Try again 💔</p>
+</div>
+
+<div class="card" id="mainCard" style="display: none;">
+    <h1>Happy 5th Anniversary ❤️</h1>
+    <h2>Dear <span style="color:#ff4d6d;">Shrishti</span> 🌸</h2>
+    <p>5 years of love, laughter, and memories 💕</p>
+    <p><strong>Will you continue this beautiful journey with me?</strong> 💌</p>
+    <div class="buttons">
+        <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+        <button id="noBtn">No 😜</button>
+    </div>
+</div>
+
+<script>
+function checkPassword() {
+    const password = document.getElementById('passwordInput').value;
+    if (password === 'love') {
+        document.getElementById('passwordCard').style.display = 'none';
+        document.getElementById('mainCard').style.display = 'block';
+        setupNoButton();
+    } else {
+        document.getElementById('errorMsg').style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+    }
+}
+
+document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') checkPassword();
+});
+
+function yesClicked() {
+    window.location.href = '../slideshow.html';
+}
+
+function setupNoButton() {
+
+    const noBtn = document.getElementById("noBtn");
+    const card = document.getElementById('mainCard');
+
+    const cardRect = card.getBoundingClientRect();
+    noBtn.style.left = (cardRect.right - 140 - 30) + 'px';
+    noBtn.style.top = (cardRect.bottom - 50) + 'px';
+
+    document.addEventListener('mousemove', (e) => {
+    const btnRect = noBtn.getBoundingClientRect();
+    const btnCenterX = btnRect.left + btnRect.width / 2;
+    const btnCenterY = btnRect.top + btnRect.height / 2;
+    
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    
+    const distX = btnCenterX - mouseX;
+    const distY = btnCenterY - mouseY;
+    const distance = Math.sqrt(distX * distX + distY * distY);
+    
+    const repelRadius = 250;
+    
+    if (distance < repelRadius) {
+        const force = (repelRadius - distance) / repelRadius;
+        let moveX = distX * force * 1.5;
+        let moveY = distY * force * 1.5;
+        
+        let newLeft = btnRect.left + moveX;
+        let newTop = btnRect.top + moveY;
+        
+        const margin = 20;
+        const maxLeft = window.innerWidth - btnRect.width - margin;
+        const maxTop = window.innerHeight - btnRect.height - margin;
+        
+        const isNearLeftEdge = newLeft <= margin + 50;
+        const isNearRightEdge = newLeft >= maxLeft - 50;
+        const isNearTopEdge = newTop <= margin + 50;
+        const isNearBottomEdge = newTop >= maxTop - 50;
+        
+        const isTrapped = (isNearLeftEdge || isNearRightEdge) && (isNearTopEdge || isNearBottomEdge);
+        
+        if (isTrapped || distance < 80) {
+            const safeDistance = 300;
+            let attempts = 0;
+            do {
+                newLeft = Math.random() * (window.innerWidth - btnRect.width - 2 * margin) + margin;
+                newTop = Math.random() * (window.innerHeight - btnRect.height - 2 * margin) + margin;
+                const newDistX = newLeft + btnRect.width / 2 - mouseX;
+                const newDistY = newTop + btnRect.height / 2 - mouseY;
+                const newDistance = Math.sqrt(newDistX * newDistX + newDistY * newDistY);
+                if (newDistance > safeDistance) break;
+                attempts++;
+            } while (attempts < 10);
+        } else {
+            newLeft = Math.max(margin, Math.min(newLeft, maxLeft));
+            newTop = Math.max(margin, Math.min(newTop, maxTop));
+        }
+        
+        noBtn.style.left = newLeft + 'px';
+        noBtn.style.top = newTop + 'px';
+    }
+    });
+}
+
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+}, 300);
+</script>
+
+</body>
+</html>
