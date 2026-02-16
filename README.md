@@ -10,7 +10,11 @@ A romantic interactive anniversary slideshow website.
 
 ## 🔒 Password Protected
 
+<<<<<<< HEAD
 Password: `love`
+=======
+
+>>>>>>> 959bcc5b39dfbe8e2bc653aba01f1c65342e6bff
 
 ## ✨ Features
 
