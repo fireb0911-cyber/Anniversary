@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our 5 Years Together</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    font-family:'Poppins',sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px 0;
+    position:relative;
+    overflow:hidden;
+    min-height:100vh;
+}
+
+/* STARS */
+.stars{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:1;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+    0%, 100% { opacity:0.3; }
+    50% { opacity:1; }
+}
+
+/* HEARTS */
+.hearts{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:1;
+}
+
+.heart{
+    position:absolute;
+    font-size:20px;
+    color:#ff69b4;
+    animation:floatHeart 8s infinite ease-in-out;
+    opacity:0.4;
+}
+
+@keyframes floatHeart{
+    0%, 100% { transform:translateY(0) rotate(0deg); opacity:0.3; }
+    50% { transform:translateY(-30px) rotate(15deg); opacity:0.6; }
+}
+
+/* MAIN CARD */
+.container{
+    width:90%;
+    max-width:1200px;
+    background:linear-gradient(135deg,#1e0035,#4b0f6b);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+    position:relative;
+    z-index:2;
+}
+
+/* GLOW EFFECTS */
+.container::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:radial-gradient(circle,rgba(255,215,130,0.35),transparent);
+    top:-150px;
+    left:-150px;
+    border-radius:50%;
+}
+
+.container::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    background:radial-gradient(circle,rgba(255,120,180,0.25),transparent);
+    bottom:-100px;
+    right:-100px;
+    border-radius:50%;
+}
+
+/* SLIDES */
+.slide{
+    display:none;
+    min-height:auto;
+    max-height:90vh;
+}
+
+.slide.active{
+    display:flex;
+}
+
+/* LEFT SIDE TEXT */
+.left{
+    width:55%;
+    padding:40px 60px;
+    color:white;
+}
+
+.left h1{
+    font-size:48px;
+    color:#f5c97a;
+    margin-bottom:20px;
+}
+
+.left p{
+    font-size:16px;
+    line-height:1.6;
+    opacity:0.9;
+    margin-bottom:8px;
+}
+
+/* RIGHT SIDE IMAGE */
+.right{
+    width:45%;
+    position:relative;
+    clip-path: ellipse(85% 100% at 100% 50%);
+    max-height:90vh;
+}
+
+.right img{
+    width:100%;
+    height:100%;
+    max-height:90vh;
+    object-fit:cover;
+}
+
+/* IMAGE SLIDES */
+.image-slide{
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+    min-height:auto;
+    max-height:90vh;
+    position:relative;
+    overflow:visible;
+}
+
+.image-slide.active{
+    display:flex;
+}
+
+.image-slide img{
+    max-width:85%;
+    max-height:70vh;
+    width:auto;
+    height:auto;
+    border-radius:20px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.6);
+    object-fit:contain;
+    position:relative;
+    z-index:2;
+}
+
+/* STARS AND HEARTS INSIDE SLIDES */
+.slide-stars,
+.slide-hearts{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:1;
+}
+
+.slide-star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:rgba(255,255,255,0.6);
+    border-radius:50%;
+    animation:twinkle 3s infinite;
+}
+
+.slide-heart{
+    position:absolute;
+    font-size:18px;
+    color:rgba(255,105,180,0.5);
+    animation:floatHeart 8s infinite ease-in-out;
+}
+
+/* CONTROLS */
+.controls{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:20px;
+    z-index:100;
+}
+
+.controls button{
+    background:linear-gradient(135deg, #f5c97a 0%, #e0a855 100%);
+    border:none;
+    color:#1e0035;
+    padding:12px 28px;
+    border-radius:50px;
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:600;
+    font-size:15px;
+    box-shadow:0 8px 20px rgba(245,201,122,0.4);
+}
+
+.controls button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(245,201,122,0.6);
+}
+
+/* MUSIC CONTROLS */
+.music-controls{
+    position:fixed;
+    top:20px;
+    right:20px;
+    display:flex;
+    gap:12px;
+    z-index:100;
+}
+
+.music-controls button{
+    background:linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+    border:none;
+    color:white;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    font-size:22px;
+    box-shadow:0 10px 25px rgba(102,126,234,0.5), inset 0 -2px 8px rgba(0,0,0,0.2);
+    position:relative;
+    overflow:hidden;
+}
+
+.music-controls button::before{
+    content:'';
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:0;
+    height:0;
+    border-radius:50%;
+    background:rgba(255,255,255,0.3);
+    transform:translate(-50%, -50%);
+    transition:width 0.4s, height 0.4s;
+}
+
+.music-controls button:hover::before{
+    width:100%;
+    height:100%;
+}
+
+.music-controls button:hover{
+    transform:translateY(-3px) scale(1.05);
+    box-shadow:0 15px 35px rgba(102,126,234,0.7), inset 0 -2px 8px rgba(0,0,0,0.3);
+}
+
+.music-controls button:active{
+    transform:translateY(-1px) scale(1.02);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .slide.active{
+        flex-direction:column;
+    }
+    .left{
+        width:100%;
+        padding:30px;
+        text-align:center;
+    }
+    .left h1{
+        font-size:36px;
+    }
+    .left p{
+        font-size:15px;
+    }
+    .right{
+        width:100%;
+        clip-path:none;
+        height:400px;
+    }
+    .image-slide{
+        padding:20px;
+        min-height:auto;
+        max-height:85vh;
+    }
+    .image-slide img{
+        max-width:90%;
+        max-height:60vh;
+    }
+    .controls{
+        bottom:20px;
+        left:50%;
+    }
+    .controls button{
+        padding:12px 24px;
+        font-size:14px;
+    }
+}
+
+@media(max-width:600px){
+    .left{
+        padding:30px 20px;
+    }
+    .left h1{
+        font-size:32px;
+    }
+    .left p{
+        font-size:16px;
+    }
+    .image-slide{
+        padding:30px 20px;
+        min-height:400px;
+    }
+    .image-slide img{
+        max-width:100%;
+        max-height:50vh;
+    }
+    .controls{
+        bottom:15px;
+        gap:10px;
+    }
+    .controls button{
+        padding:10px 20px;
+        font-size:13px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div id="passwordScreen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg,#1e0035,#4b0f6b); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+    <div style="background: white; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+        <h1 style="color: #4b0f6b; margin-bottom: 20px;">🔒 Enter Password</h1>
+        <input type="password" id="mainPasswordInput" placeholder="Enter password" style="width: 250px; padding: 12px; margin: 20px 0; border: 2px solid #4b0f6b; border-radius: 10px; font-size: 16px; text-align: center;">
+        <br>
+        <button onclick="checkMainPassword()" style="width: 150px; padding: 12px; background: linear-gradient(135deg, #f5c97a 0%, #e0a855 100%); color: #1e0035; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; font-weight: 600;">Unlock 💖</button>
+        <p id="mainErrorMsg" style="color: #ff4d6d; margin-top: 15px; display: none; font-weight: 600;">Wrong password! Try again 💔</p>
+    </div>
+</div>
+
+<div id="mainContent" style="display: none;">
+
+<div class="stars" id="starsContainer"></div>
+<div class="hearts" id="heartsContainer"></div>
+
+<div class="music-controls">
+    <button id="playPauseBtn" onclick="toggleMusic()">⏸️</button>
+    <button onclick="nextSong()">⏭️</button>
+</div>
+
+<audio id="bgMusic">
+    <source src="Music/Bolna maahi Bolna Arijit Singh Love song Whatspp Status 30 sec - Akshay Mohite.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+    <!-- HERO SLIDE -->
+    <div class="slide active">
+        <div class="left">
+            <h1>Happy 5th Anniversary, Shrishti 💗</h1>
+            <p>5 years ago, you came into my life and made everything brighter.</p>
+            <p>Through every fight, every laugh, every hard time — you stayed.</p>
+            <p>And I promise, I'll always stay too.</p>
+            <p>Forever is not enough with you.</p>
+        </div>
+
+        <div class="right">
+            <img src="images/WhatsApp Image 2026-02-14 at 3.55.18 PM.jpeg">
+        </div>
+
+        <div class="controls">
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <!-- IMAGE SLIDES -->
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.21 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.21 PM (2).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.21 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.22 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.22 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.23 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.25 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.25 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.26 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.26 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.27 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.27 PM (2).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.27 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.28 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.28 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.29 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.29 PM (2).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.29 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.31 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <!-- SECOND QUOTE SLIDE -->
+    <div class="slide">
+        <div class="left">
+            <h1>Happy 5 Years of Us 💗</h1>
+            <p>From strangers to best friends to soulmates —</p>
+            <p>we built something beautiful together.</p>
+            <p>Thank you for loving me even when I'm not perfect.</p>
+        </div>
+
+        <div class="right">
+            <img src="images/WhatsApp Image 2026-02-14 at 3.55.38 PM.jpeg">
+        </div>
+
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.39 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.39 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.40 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.40 PM (2).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.40 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.41 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.41 PM (2).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.41 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.42 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.42 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.43 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.43 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.44 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.44 PM (2).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.44 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.45 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.45 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.46 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.46 PM (2).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.46 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.47 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.47 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.48 PM (1).jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+    <div class="image-slide">
+        <div class="slide-stars"></div>
+        <div class="slide-hearts"></div>
+        <img src="images/WhatsApp Image 2026-02-14 at 3.55.48 PM.jpeg">
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Previous</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+function checkMainPassword() {
+    const password = document.getElementById('mainPasswordInput').value;
+    if (password === 'love') {
+        document.getElementById('passwordScreen').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        startAutoSlide();
+    } else {
+        document.getElementById('mainErrorMsg').style.display = 'block';
+        document.getElementById('mainPasswordInput').value = '';
+    }
+}
+
+document.getElementById('mainPasswordInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') checkMainPassword();
+});
+
+let slides = document.querySelectorAll('.slide, .image-slide');
+let index = 0;
+let autoSlideInterval;
+
+// Create stars
+const starsContainer = document.getElementById('starsContainer');
+for(let i = 0; i < 100; i++){
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    starsContainer.appendChild(star);
+}
+
+// Create hearts
+const heartsContainer = document.getElementById('heartsContainer');
+for(let i = 0; i < 15; i++){
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '♥';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.top = Math.random() * 100 + '%';
+    heart.style.animationDelay = Math.random() * 4 + 's';
+    heartsContainer.appendChild(heart);
+}
+
+// Add stars and hearts to each image slide
+document.querySelectorAll('.image-slide').forEach(slide => {
+    const starsDiv = slide.querySelector('.slide-stars');
+    const heartsDiv = slide.querySelector('.slide-hearts');
+    
+    // Add stars to slide
+    for(let i = 0; i < 30; i++){
+        const star = document.createElement('div');
+        star.className = 'slide-star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        starsDiv.appendChild(star);
+    }
+    
+    // Add hearts to slide
+    for(let i = 0; i < 8; i++){
+        const heart = document.createElement('div');
+        heart.className = 'slide-heart';
+        heart.innerHTML = '♥';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = Math.random() * 100 + '%';
+        heart.style.animationDelay = Math.random() * 4 + 's';
+        heartsDiv.appendChild(heart);
+    }
+});
+
+function showSlide(i){
+    slides.forEach(s => s.classList.remove('active'));
+    slides[i].classList.add('active');
+}
+
+function changeSlide(direction){
+    index += direction;
+    if(index >= slides.length) index = 0;
+    if(index < 0) index = slides.length - 1;
+    showSlide(index);
+    resetAutoSlide();
+}
+
+function autoSlide(){
+    index++;
+    if(index >= slides.length) index = 0;
+    showSlide(index);
+}
+
+function startAutoSlide(){
+    autoSlideInterval = setInterval(autoSlide, 3000);
+}
+
+function resetAutoSlide(){
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+}
+
+// Music control
+const music = document.getElementById('bgMusic');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const songs = [
+    'Music/Bolna maahi Bolna Arijit Singh Love song Whatspp Status 30 sec - Akshay Mohite.mp3',
+    'Music/Duniya Whatsapp Status Luka Chuppi Kartik Aaryan Kriti Sanon Akhil Dhvani - Royal Crush Entertainment.mp3',
+    'Music/Latest Whatsapp Status Phir Kabhi MS Dhoni The Untold Story Romantic 30 sec Status 2020 - Abhijeet\'s Editing & Status.mp3',
+    'Music/Love Status- Tum Tak (A.R. Rahman) Song Black Screen New Lyrical Whatsapp Status - RoHit Creation.mp3',
+    'Music/Mast Magan Whatsapp 30 sec status song 💜 - Athar Khan.mp3',
+    'Music/SONA SONA WHATSAPP STATUS ALONE ABHI #jogi #rajkumarrao #status - Statustune 7.mp3',
+    'Music/Tu hai to mujhe fir aur kya chahiye ❤II WhatsApp Status Video bangal WhatsApp Status Video ♥️🫂🥀 - SS.STUDIO.mp3'
+];
+let currentSong = 0;
+
+function toggleMusic(){
+    if(music.paused){
+        music.play();
+        playPauseBtn.innerHTML = '⏸️';
+    } else {
+        music.pause();
+        playPauseBtn.innerHTML = '▶️';
+    }
+}
+
+function nextSong(){
+    currentSong = (currentSong + 1) % songs.length;
+    music.src = songs[currentSong];
+    music.load();
+    music.play().catch(e => console.log('Play error:', e));
+    playPauseBtn.innerHTML = '⏸️';
+}
+
+music.addEventListener('ended', () => {
+    nextSong();
+});
+
+music.addEventListener('error', (e) => {
+    console.log('Audio error, trying next song');
+    nextSong();
+});
+
+// Auto play music on first interaction
+document.addEventListener('click', () => {
+    if(music.paused){
+        music.play();
+        playPauseBtn.innerHTML = '⏸️';
+    }
+}, {once: true});
+
+// Start auto slide on password unlock (called from checkMainPassword)
+// startAutoSlide();
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowLeft') changeSlide(-1);
+    if(e.key === 'ArrowRight') changeSlide(1);
+});
+</script>
+
+</body>
+</html>
